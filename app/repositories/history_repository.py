@@ -21,7 +21,7 @@ class HistoryRepository:
     async def get_all(self, page: int = 1, per_page: int = 10, filters: Optional[dict] = None) -> tuple[List[History], int]:
         offset = (page - 1) * per_page
 
-        query = select(History)
+        query = select(History).order_by(History.created_at.desc())
 
         if filters:
             for field, value in filters.items():
